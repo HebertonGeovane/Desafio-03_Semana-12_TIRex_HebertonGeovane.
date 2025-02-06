@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "baseUrl": "./",  // Caminho base para os módulos
+    "paths": {
+      "@/*": ["src/*"]  // Alias para o diretório src
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "references": []  // Remover as referências externas aqui
+}
+
