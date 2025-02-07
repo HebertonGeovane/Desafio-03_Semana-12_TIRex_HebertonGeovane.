@@ -25,7 +25,7 @@ const ImageSection3 = () => {
         
         <div className="flex justify-start">
           <button
-            className="bg-[#B88E2F] text-white text-xl font-semibold rounded-md"
+            className="bg-[#B88E2F] text-white text-xl font-semibold rounded-md transition-colors duration-300 hover:bg-[#F98F]"
             style={{
               width: '176px',
               height: '48px',

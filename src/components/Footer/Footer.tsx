@@ -51,8 +51,8 @@ const Footer = () => {
               
               <div className="flex flex-col space-y-14 ">
                 <h3 className="text-[#9F9F9F]  text-[20px] font-bold mb-4">Links</h3>
-                <a href="#" className="text-black">Home</a>
-                <a href="#" className="text-black">Shop</a>
+                <a href="/" className="text-black">Home</a>
+                <a href="/shop" className="text-black">Shop</a>
                 <a href="#" className="text-black">About</a>
                 <a href="#" className="text-black">Contact</a>
               </div>

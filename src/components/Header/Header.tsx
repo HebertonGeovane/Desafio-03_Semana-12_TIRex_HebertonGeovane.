@@ -17,8 +17,8 @@ const Header: React.FC = () => {
       <div className="absolute top-[38px] left-[505px] w-[430px] h-[24px] text-[#000000]">
       <nav>
         <ul className="flex justify-between w-full text-[#000000]">
-          <li><a href="#">Home</a></li>
-          <li><a href='#'>Shop</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/shop">Shop</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
         </ul>

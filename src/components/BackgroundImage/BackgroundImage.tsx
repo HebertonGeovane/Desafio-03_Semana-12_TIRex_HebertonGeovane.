@@ -61,7 +61,7 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({ height }) => {
 
          
           <button
-            className="bg-[#B88E2F] text-white text-[16px] font-[700] leading-[24px] w-[222px] h-[74px] rounded-md flex items-center justify-center gap-2"
+            className="bg-[#B88E2F] text-white text-[16px] font-[700] leading-[24px] w-[222px] h-[74px] rounded-md flex items-center justify-center gap-2 transition-colors duration-300 hover:bg-[#F98F] "
             style={{
               fontFamily: 'Poppins',
               textUnderlinePosition: 'from-font',
