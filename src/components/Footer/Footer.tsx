@@ -54,7 +54,7 @@ const Footer = () => {
                 <a href="/" className="text-black">Home</a>
                 <a href="/shop" className="text-black">Shop</a>
                 <a href="#" className="text-black">About</a>
-                <a href="#" className="text-black">Contact</a>
+                <a href="/contact" className="text-black">Contact</a>
               </div>
 
               
