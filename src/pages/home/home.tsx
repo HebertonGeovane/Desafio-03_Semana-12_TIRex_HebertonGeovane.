@@ -5,6 +5,7 @@ import ImageSection1 from '../../components/ImageSection1/ImageSection1';
 import ImageSection2 from '../../components/ImageSection2/ImageSection2';
 import ImageSection3 from '../../components/ImageSection3/ImageSection3';
 import Share from '../../components/Share/Share';
+//import ProductList from '../../components/productlist/productlist';
 
 
 const HomePage = () => {
@@ -16,6 +17,8 @@ const HomePage = () => {
       <ImageSection1 />
      
       <ImageSection2 />
+
+      
       
      <ImageSection3 />
 

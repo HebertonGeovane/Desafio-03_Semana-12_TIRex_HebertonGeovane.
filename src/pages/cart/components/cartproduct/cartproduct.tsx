@@ -1,6 +1,7 @@
 import React from "react";
 import ProductImage from "../../../../assets/Asgaard sofa 3.svg";
 import DeleteIcon from "../../../../assets/Vector(7).svg";
+import { CartProvider } from "../../components/cartcontext/cartcontext";
 
 const CartProduct = () => {
     return (
