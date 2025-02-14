@@ -1,116 +1,112 @@
-import React from "react";
-import ProductImage from "../../../../assets/Asgaard sofa 3.svg";
+import React, { useEffect } from "react";
+import { useCart } from "../../../../components/cartcontext/cartcontext";
 import DeleteIcon from "../../../../assets/Vector(7).svg";
-import { CartProvider } from "../../components/cartcontext/cartcontext";
+import { useNavigate } from "react-router-dom";
 
 const CartProduct = () => {
-    return (
-        <div className="w-full h-[525px] mt-[416px] bg-white">
-            {/* Container principal */}
-            <div className="w-[1440px] h-[525px] mx-auto flex">
-                {/* Flexbox com as medidas especificadas */}
-                <div className="w-[817px] h-[215px] mt-[72px] ml-[100px] flex flex-col">
-                    {/* Faixa com fundo #F9F1E7 */}
-                    <div className="w-[817px] h-[55px] bg-[#F9F1E7] flex items-center">
-                        {/* Texto "Product" */}
-                        <span className="w-[63px] h-[24px] text-black text-[16px] font-poppins font-medium leading-[24px] ml-[142px]">
-                            Product
-                        </span>
-                        {/* Texto "Price" */}
-                        <span className="w-[40px] h-[24px] text-black text-[16px] font-poppins font-medium leading-[24px] ml-[137px]">
-                            Price
-                        </span>
-                        {/* Texto "Quantity" */}
-                        <span className="w-[70px] h-[24px] text-black text-[16px] font-poppins font-medium leading-[24px] ml-[137px]">
-                            Quantity
-                        </span>
-                        {/* Texto "Subtotal" */}
-                        <span className="w-[69px] h-[24px] text-black text-[16px] font-poppins font-medium leading-[24px] ml-[60px]">
-                            Subtotal
-                        </span>
-                    </div>
+  const { cart, removeFromCart, updateQuantity } = useCart();
+  const navigate = useNavigate(); 
 
-                    {/* Restante do conteúdo da flexbox */}
-                    <div className="flex-1 flex items-center">
-                        {/* Container da imagem do produto */}
-                        <div className="w-[108px] h-[105px] bg-[#F9F1E7] rounded-[10px] flex items-center justify-center">
-                            <img
-                                src={ProductImage}
-                                alt="Asgaard Sofa"
-                                className="w-[111px] h-[90px] object-cover"
-                            />
-                        </div>
+  useEffect(() => {
+    console.log("Carrinho no CartProduct:", cart);
+  }, [cart]);
 
-                        {/* Nome do produto e preço */}
-                        <div className="flex items-center ml-[20px]">
-                            <div className="w-[108px] h-[24px]  flex items-center justify-center text-[16px] font-poppins font-normal text-[#9F9F9F] ">
-                                Asgaard sofa
-                            </div>
-                            <div className="w-[112px] h-[24px]  flex items-center justify-center text-[16px] font-poppins font-normal text-[#9F9F9F]  ml-[70px]">
-                                Rs. 250,000.00
-                            </div>
-                        </div>
+  
+  const parsePrice = (price) => {
+    if (typeof price !== 'string') return 0; 
+    
+    const cleanedPrice = price.replace(/[^0-9]/g, '');
+    return parseFloat(cleanedPrice) || 0; 
+  };
+     
+  const handleCheckout = () => {
+    navigate("/checkout", { state: { cart } }); 
+  };
 
-                        {/* Input de quantidade */}
-                        <div className="w-[106.54px] h-[47px] border border-[#9F9F9F] rounded-[10px] flex items-center justify-between ml-[90px] px-[10px]">
-                            <span className="text-[16px] font-poppins font-normal text-black">-</span>
-                            <span className="text-[16px] font-poppins font-medium text-black">1</span>
-                            <span className="text-[16px] font-poppins font-normal text-black">+</span>
-                        </div>
+  return (
+    <div className="w-full h-[525px] mt-[416px] bg-white">
+      <div className="w-[1440px] h-[525px] mx-auto flex">
+        
+        <div className="w-[817px] h-[215px] mt-[72px] ml-[100px] flex flex-col">
+          
+          <div className="w-[817px] h-[55px] bg-[#F9F1E7] flex items-center">
+            <span className="w-[200px] text-black text-[16px] font-poppins font-medium ml-[120px]">Product</span>
+            <span className="w-[100px] text-black text-[16px] font-poppins font-medium ml-[50px]">Price</span>
+            <span className="w-[100px] text-black text-[16px] font-poppins font-medium ml-[50px]">Quantity</span>
+            <span className="w-[100px] text-black text-[16px] font-poppins font-medium ml-[50px]">Subtotal</span>
+          </div>
 
-                        {/* Texto "Rs. 250,000.00" após o input */}
-                        <div className="w-[112px] h-[24px] flex items-center justify-center text-[16px] font-poppins font-normal text-black ml-[20px]">
-                            Rs. 250,000.00
-                        </div>
+          
+          {cart.map((product) => {
+            const priceNumber = parsePrice(product.price); 
+            const subtotal = product.quantity * priceNumber; 
 
-                        {/* Ícone de deletar */}
-                        <div className="w-[28px] h-[28px] flex items-center justify-center ml-[20px]">
-                            <img
-                                src={DeleteIcon}
-                                alt="Delete"
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                    </div>
+            return (
+              <div key={product.id} className="flex items-center border-b border-[#9F9F9F] py-4">
+                
+                <div className="w-[108px] h-[105px] bg-[#F9F1E7] rounded-[10px] flex items-center justify-center ml-[20px]">
+                  <img src={product.img} alt={product.name} className="w-[111px] h-[90px] object-cover" />
                 </div>
-
-                {/* Flexbox à direita */}
-                <div className="w-[393px] h-[390px] border  bg-[#F9F1E7] mt-[72px] ml-[40px] flex flex-col p-[20px]">
-                    {/* Título "Cart Totals" */}
-                    <div className="w-[179px] h-[48px] text-black text-[32px] font-poppins font-semibold leading-[48px] mb-[20px]">
-                        Cart Totals
-                    </div>
-
-                    {/* Texto "Subtotal" */}
-                    <div className="flex justify-between mb-[20px]">
-                        <span className="w-[69px] h-[24px] text-black text-[16px] font-poppins font-medium leading-[24px]">
-                            Subtotal
-                        </span>
-                        <span className="w-[112px] h-[24px]  text-black text-[16px] font-poppins font-normal leading-[24px] flex items-center justify-center">
-                            Rs. 250,000.00
-                        </span>
-                    </div>
-
-                    {/* Texto "Total" */}
-                    <div className="flex justify-between mb-[20px]">
-                        <span className="w-[41px] h-[24px] text-black text-[16px] font-poppins font-medium leading-[24px]">
-                            Total
-                        </span>
-                        <span className="w-[144px] h-[30px] bg- text-[#B88E2F] text-[20px] font-poppins font-medium leading-[30px] flex items-center justify-center">
-                            Rs. 250,000.00
-                        </span>
-                    </div>
-
-                    {/* Botão "Check Out" */}
-                    <div className="flex justify-center">
-                        <button className="w-[222px] h-[59px] border border-black rounded-[15px]  text-black text-[16px] font-poppins font-medium flex items-center justify-center mt-[40px] ">
-                            Check Out
-                        </button>
-                    </div>
+                
+                
+                <div className="w-[200px] text-[16px] font-poppins font-normal text-[#9F9F9F] ml-[20px]">
+                  {product.name}
                 </div>
-            </div>
+                
+                
+                <div className="w-[100px] text-[16px] font-poppins font-normal text-[#9F9F9F] ml-[50px]">
+                  {product.price}
+                </div>
+                
+                
+                <div className="w-[100px] flex items-center justify-center ml-[50px]">
+                  <div className="w-[106.54px] h-[47px] border border-[#9F9F9F] rounded-[10px] flex items-center justify-between px-[10px]">
+                    <button onClick={() => updateQuantity(product.id, product.quantity - 1)}>-</button>
+                    <span>{product.quantity}</span>
+                    <button onClick={() => updateQuantity(product.id, product.quantity + 1)}>+</button>
+                  </div>
+                </div>
+                
+                
+                <div className="w-[100px] text-[16px] font-poppins font-normal text-black ml-[50px]">
+                  Rs. {subtotal.toLocaleString()} 
+                </div>
+                
+                
+                <div className="w-[28px] h-[28px] ml-[30px]"> 
+                  <img src={DeleteIcon} alt="Delete" className="cursor-pointer" onClick={() => removeFromCart(product.id)} />
+                </div>
+              </div>
+            );
+          })}
         </div>
-    );
+
+        
+        <div className="w-[393px] h-[390px] border bg-[#F9F1E7] mt-[72px] ml-[40px] flex flex-col p-[20px]">
+          <h2 className="text-[32px] font-poppins font-semibold">Cart Totals</h2>
+          <div className="flex justify-between mb-[20px]">
+            <span className="text-[16px] font-poppins font-medium">Subtotal</span>
+            <span className="text-[16px] font-poppins font-normal">
+              Rs. {cart.reduce((acc, product) => acc + (product.quantity * parsePrice(product.price)), 0).toLocaleString()}
+            </span>
+          </div>
+          <div className="flex justify-between mb-[20px]">
+            <span className="text-[16px] font-poppins font-medium">Total</span>
+            <span className="text-[20px] text-[#B88E2F] font-poppins font-medium">
+              Rs. {cart.reduce((acc, product) => acc + (product.quantity * parsePrice(product.price)), 0).toLocaleString()}
+            </span>
+          </div>
+          <div className="flex justify-center">
+            <button className="w-[222px] h-[59px] border border-black rounded-[15px] text-black text-[16px] font-poppins font-medium mt-[40px]"
+            onClick={handleCheckout}
+            >
+              Check Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CartProduct;

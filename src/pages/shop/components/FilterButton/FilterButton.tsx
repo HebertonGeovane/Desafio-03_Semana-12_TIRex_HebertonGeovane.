@@ -5,15 +5,15 @@ import VectorIcon3 from "../../../../assets/Vector(3).svg";
 import LineIcon from "../../../../assets/Line5.svg";
 
 interface FilterButtonProps {
-  onShowCountChange: (count: number) => void; // Função para atualizar o número de itens por página
-  totalProducts: number; // Total de produtos disponíveis
-  showCount: number; // Quantidade de itens a serem exibidos por página
+  onShowCountChange: (count: number) => void; 
+  totalProducts: number; 
+  showCount: number; 
 }
 
 const FilterButton: React.FC<FilterButtonProps> = ({ onShowCountChange, totalProducts, showCount }) => {
   const handleShowCountChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const count = Number(event.target.value); // Valor selecionado no dropdown
-    onShowCountChange(count); // Atualiza o estado no componente pai
+    onShowCountChange(count); 
   };
 
   return (
@@ -46,7 +46,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({ onShowCountChange, totalPro
         className="w-[37px] h-[0px] border-t-[2px] border-solid border-[#9F9F9F] rotate-[-90deg]"
       />
 
-      {/* Mensagem dinâmica */}
+      
       <span className="text-black text-[16px] font-[400] leading-[24px] font-[Poppins]">
         Showing 1-16 –{showCount} of {totalProducts} 32 results
       </span>
