@@ -1,73 +1,66 @@
-// components/cartcontext/cartcontext.tsx
-import React, { createContext, useState, useContext } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-// Define o tipo do produto no carrinho
-type CartProduct = {
-  id: number;
+interface Product {
+  id: string;
   name: string;
-  price: string;
+  price: number;
   img: string;
   quantity: number;
-};
-
-// Define os tipos de estado e funções
-interface CartContextType {
-  cart: CartProduct[];
-  addToCart: (product: CartProduct) => void;
-  updateQuantity: (productId: number, quantity: number) => void;
-  removeFromCart: (productId: number) => void;
-  clearCart: () => void;
+  description: string;
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+interface CartContextType {
+  cart: Product[];
+  addToCart: (product: Product) => void;
+  removeFromCart: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
+}
 
-// Provedor do contexto que envolvem os componentes da aplicação
-export const CartProvider: React.FC = ({ children }) => {
-  const [cart, setCart] = useState<CartProduct[]>([]);
+export const CartContext = createContext<CartContextType | undefined>(undefined);
 
-  // Adiciona um produto ao carrinho
-  const addToCart = (product: CartProduct) => {
+
+
+export const CartProvider = ({ children }: { children: React.ReactNode }) => {
+  const [cart, setCart] = useState<Product[]>(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (product: Product) => {
     setCart((prevCart) => {
       const existingProduct = prevCart.find((item) => item.id === product.id);
       if (existingProduct) {
         return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+          item.id === product.id ? { ...item, quantity: item.quantity + product.quantity } : item
         );
-      } else {
-        return [...prevCart, { ...product, quantity: 1 }];
       }
+      return [...prevCart, product];
     });
   };
 
-  // Atualiza a quantidade do produto no carrinho
-  const updateQuantity = (productId: number, quantity: number) => {
+  const removeFromCart = (id: string) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  };
+
+  const updateQuantity = (id: string, quantity: number) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
+        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
       )
     );
   };
 
-  // Remove um produto do carrinho
-  const removeFromCart = (productId: number) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
-  };
-
-  // Remove todos os produtos do carrinho
-  const clearCart = () => {
-    setCart([]);
-  };
-
   return (
-    <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart, clearCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-// Hook personalizado para usar o contexto do carrinho
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {

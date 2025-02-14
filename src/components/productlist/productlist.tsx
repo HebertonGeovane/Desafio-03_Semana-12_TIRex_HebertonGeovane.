@@ -1,8 +1,7 @@
 import React from "react";
 import Card from "../../components/card/card";
 import usePagination from "../../hooks/usePagination";
-import PaginationButton from "../../pages/shop/components/PaginationButton/PaginationButton"; // Importa os botões
-
+import PaginationButton from "../../pages/shop/components/PaginationButton/PaginationButton"; 
 const products = [
   {
     id: 1,
@@ -131,14 +130,14 @@ const ProductList: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Grid de Produtos */}
+      
       <div className="flex flex-wrap gap-4 justify-center">
         {getCurrentItems().map((product) => (
           <Card key={product.id} product={product} />
         ))}
       </div>
 
-      {/* Botões de Paginação */}
+      
       <div className="flex gap-4 mt-6">
         {[...Array(totalPages)].map((_, index) => (
           <button

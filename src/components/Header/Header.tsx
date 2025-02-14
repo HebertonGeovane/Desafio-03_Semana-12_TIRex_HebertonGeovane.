@@ -1,14 +1,24 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/Meubel House_Logos-05.svg';
 import VectorIcon from '../../assets/Vector.svg';
 import CartIcon from '../../assets/ant-design_shopping-cart-outlined.svg';
+import ShoppingCartModal from '../../pages/about/components/showModal/showModal';
 
 const Header: React.FC = () => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
+    const [isCartModalOpen, setIsCartModalOpen] = useState(false); 
 
     const handleLoginClick = () => {
-        navigate('/login'); 
+        navigate('/login');
+    };
+
+    const handleCartClick = () => {
+        setIsCartModalOpen(!isCartModalOpen); 
+    };
+
+    const handleNavigateToCart = () => {
+        navigate('/cart'); 
     };
 
     return (
@@ -31,13 +41,22 @@ const Header: React.FC = () => {
                     </nav>
                 </div>
                 <div className="absolute top-[41px] left-[1255px] flex items-center gap-10">
-                   
                     <button onClick={handleLoginClick}>
                         <img src={VectorIcon} alt="Vetor" className="w-[23.33px] h-[18.67px]" />
                     </button>
-                    <img src={CartIcon} alt="Carrinho" className="w-[24.53px] h-[22.06px] ml-[8px]" />
+                    <button onClick={handleCartClick}>
+                        <img src={CartIcon} alt="Carrinho" className="w-[24.53px] h-[22.06px] ml-[8px]" />
+                    </button>
                 </div>
             </header>
+
+            
+            {isCartModalOpen && (
+                <ShoppingCartModal 
+                    onClose={() => setIsCartModalOpen(false)} 
+                    onNavigateToCart={handleNavigateToCart} 
+                />
+            )}
         </div>
     );
 };

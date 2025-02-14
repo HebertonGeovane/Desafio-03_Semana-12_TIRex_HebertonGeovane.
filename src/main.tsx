@@ -28,7 +28,7 @@ createRoot(document.getElementById("root")!).render(
         </div>
         <Footer />
       </main>
-      </CartProvider>
+    </CartProvider>
     </BrowserRouter>
   </ClerkProvider>
   </StrictMode>
