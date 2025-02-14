@@ -1,50 +1,108 @@
-# React + TypeScript + Vite
+# Furniro - Furniture Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Furniro Logo](./src/assets/Meubel%20House_Logos-05.svg) 
 
-Currently, two official plugins are available:
+Furniro is a web application for a furniture store, built with **React**, **TypeScript**, and styled with **Tailwind CSS**. The project simulates a database using `db.json` to manage products and includes features such as a shopping cart, pagination, purchase and contact forms, and integration with **AWS** for hosting and image storage. The site will be hosted on an **AWS EC2 instance**, with images stored in an **S3 Bucket**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Key Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Login Page:** User authentication for accessing the system.
+- **Shopping Cart:** Add and remove items with real-time updates.
+- **Product Carousel:** Display featured or popular items using **shadcn/ui Carousel**.
+- **Pagination:** Navigate through product categories and listings.
+- **Purchase Form:** Complete orders with customer details.
+- **Contact Form:** Send messages to the company.
+- **AWS Integration:**
+  - Hosting on an **EC2 instance**.
+  - Image storage in an **S3 Bucket**.
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Technologies Used
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **Frontend:**
+  - React
+  - TypeScript
+  - Tailwind CSS
+  - React Router (for navigation)
+  - shadcn/ui (for UI components like Carousel)
+- **Simulated Backend:**
+  - JSON Server (db.json)
+- **Hosting and Storage:**
+  - AWS EC2 (hosting)
+  - AWS S3 (image storage)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+---
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## How to Run the Project Locally
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+- Git
+
+### Steps to Set Up
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/seu-usuario/furniro.git
+   cd furniro
+
+2. **Install Dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+
+3. **Start JSON Server (Simulated Database)**
+    ```bash
+    npx json-server --watch db.json --port 3000
+
+4. **Start the React Project**
+    ```bash
+    npm run dev
+
+## Project Structure
+furniro/
+├── public/               # Static assets (images, SVGs)
+├── src/
+│   ├── assets/           # Images and icons (e.g., Meubel House_Logos-05.svg)
+│   ├── components/       # Reusable components
+│   ├── hooks/            # Custom hooks (e.g., useCart, usePagination)
+│   ├── lib/              # Utilities
+│   ├── pages/            # Application pages
+│   ├── App.css           # Global styles
+│   └── main.tsx          # Entry point
+├── db.json               # Simulated database
+├── package.json          # Dependencies and scripts
+├── tailwind.config.js    # Tailwind CSS configuration
+└── README.md             # Project documentation
+
+## AWS Hosting
+### EC2 Instance
+### The site will be hosted on an AWS EC2 instance.
+
+### Access the site using the public IP address of the instance or a configured domain.
+
+### S3 Bucket for Images
+### All images are stored in an S3 Bucket.
+
+### Image URLs are dynamically loaded in the frontend.
+
+Contact
+Heberton Geovane 
+
+GitHub: @heberton-geovane
+
+Technical Configurations (Vite + ESLint)
+This project uses Vite as the bundler and ESLint for linting. Below are some relevant configurations:
+
+Vite Plugins
+@vitejs/plugin-react: Uses Babel for Fast Refresh.
+
+@vitejs/plugin-react-swc: Uses SWC for Fast Refresh (optional).
+
+
